@@ -1,2 +1,4 @@
 .env
 animegg-drive.json
+./public/
+./temp/
