@@ -7,6 +7,7 @@ import (
 	"os"
 	"log"
 	"github.com/joho/godotenv"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func main() {
@@ -16,8 +17,15 @@ func main() {
 	}
 
 	app := fiber.New(fiber.Config{
-        BodyLimit: 1 * 1024 * 1024 * 1024,
-    })
+		BodyLimit: 1 * 1024 * 1024 * 1024,
+	})
+
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*", // Mengizinkan origin tertentu
+		AllowMethods: "GET,POST,PUT,DELETE",          // Mengizinkan metode GET, POST, PUT
+		AllowHeaders: "Content-Type,Authorization", // Mengizinkan header tertentu
+	}))
+
 	config.ConnectDatabase()
 
 	routes.WebRoutes(app)

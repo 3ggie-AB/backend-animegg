@@ -31,5 +31,18 @@ func ConnectDatabase() {
 
 	fmt.Println("Database berhasil terkoneksi!")
 	DB = db
-	DB.AutoMigrate(&models.Anime{}, &models.Episode{},&models.User{},&models.Session{})
+	DB.AutoMigrate(
+		&models.User{},
+		&models.Session{},
+		&models.Notification{},
+		&models.Process{},
+		&models.Anime{},
+		&models.Episode{},
+		&models.Video{},
+		&models.Genre{},
+		&models.Studio{},
+		&models.Season{},
+		&models.AnimeGenre{},
+	)
+	
 }

@@ -12,6 +12,7 @@ func ApiRoutes(app *fiber.App) {
 	// Routes untuk Authentication
 	api.Post("/register", controllers.Register)
 	api.Post("/login", controllers.Login)
+	api.Post("/cektoken", controllers.CekToken)
 	api.Post("/logout", middlewares.CheckToken, controllers.Logout)
 
 	// Routes untuk Anime
@@ -23,4 +24,11 @@ func ApiRoutes(app *fiber.App) {
 	api.Get("/anime/:id/episode/:episode", controllers.GetAnimeEpisode)
 	api.Post("/episode", middlewares.CheckToken, controllers.CreateEpisode)
 	api.Get("/episode/:anime_id", controllers.GetEpisodesByAnime)
+
+	// Routes untuk User
+	api.Get("/users", middlewares.CheckAdmin, controllers.GetUsers)
+	api.Post("/user", middlewares.CheckAdmin, controllers.CreateUser)
+	api.Get("/user/:id", middlewares.CheckAdmin, controllers.GetUser)
+	api.Put("/user/:id", middlewares.CheckAdmin, controllers.UpdateUser)
+	api.Delete("/user/:id", middlewares.CheckAdmin, controllers.DeleteUser)
 }
